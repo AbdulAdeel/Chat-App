@@ -172,7 +172,7 @@ const Chats = () => {
               overflowY: "auto", // Enable scrollbar on hover
             },
             "&::-webkit-scrollbar": {
-              width: "8px",
+              width: "6px",
             },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor:
