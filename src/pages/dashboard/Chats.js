@@ -53,7 +53,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
         backgroundColor:
           theme.palette.mode === "light"
             ? "#FFF"
-            : theme.palette.background.default,
+            : theme.palette.background.paper,
       }}
       p={2}
     >
@@ -94,7 +94,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: 20,
-  backgroundColor: alpha(theme.palette.background.default, 1),
+  backgroundColor: alpha(theme.palette.background.paper, 1),
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
@@ -130,7 +130,7 @@ const Chats = () => {
         backgroundColor:
           theme.palette.mode === "light"
             ? "#F8FAFF"
-            : theme.palette.background.paper,
+            : theme.palette.background.default,
         boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
       }}
     >
@@ -148,7 +148,7 @@ const Chats = () => {
         <Stack sx={{ width: "100%" }}>
           <Search>
             <SearchIconWrapper>
-              <MagnifyingGlass color="#709CE6" />
+              <MagnifyingGlass color= "#709CE6" />
             </SearchIconWrapper>
             <StyledInputBase placeholder="Search..." />
           </Search>
@@ -167,7 +167,7 @@ const Chats = () => {
             flexGrow: 1,
             overflow: "hidden", // Default hidden scrollbar
             height: "100%",
-            paddingRight: "15px", // Space between elements and scrollbar
+            paddingRight: "10px", // Space between elements and scrollbar
             "&:hover": {
               overflowY: "auto", // Enable scrollbar on hover
             },
