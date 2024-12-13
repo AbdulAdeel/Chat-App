@@ -10,7 +10,7 @@ import {
   Timeline,
 } from "./MsgTypes";
 
-const Message = () => {
+const Message = ({menu}) => {
   return (
     <Box p={3}>
       <Stack spacing={3}>
@@ -23,22 +23,22 @@ const Message = () => {
               switch (el.subtype) {
                 case "img":
                   // image message
-                  return <MediaMsg el={el} />;
+                  return <MediaMsg el={el} menu={menu}/>;
 
                 case "doc":
-                  return <DocMsg el={el} />;
+                  return <DocMsg el={el} menu={menu} />;
 
                 case "link":
                   // Link message
-                  return <LinkMsg el={el} />;
+                  return <LinkMsg el={el} menu={menu} />;
 
                 case "reply":
                   // Reply message
-                  return <ReplyMsg el={el} />;
+                  return <ReplyMsg el={el} menu={menu} />;
 
                 default:
                   // text message
-                  return <TextMsg el={el} />;
+                  return <TextMsg el={el} menu={menu} />;
               }
 
             default:

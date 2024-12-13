@@ -168,7 +168,7 @@ const Footer = () => {
                 right: isMobile
                   ? 20
                   : searchParams.get("open") === "true"
-                  ? 420
+                  ? 100
                   : 100,
               }}
             >
