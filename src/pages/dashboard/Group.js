@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Divider,
@@ -7,16 +8,24 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React from "react";
 import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
 } from "../../components/Search";
 import { MagnifyingGlass, Plus } from "phosphor-react";
+import { ChatList } from "../../data";
+import ChatElement from "../../components/ChatElement";
+import CreateGroup from "../../sections/main/CreateGroup";
 
 const Group = () => {
   const theme = useTheme();
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
   return (
     <>
       <Stack direction={"row"} sx={{ width: "100%" }}>
@@ -27,8 +36,8 @@ const Group = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "light"
                 ? "#F8FAFF"
-                : theme.palette.background,
-            width: 320,
+                : theme.palette.background.default,
+            width: 340,
             boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
           }}
         >
@@ -57,19 +66,77 @@ const Group = () => {
                 {" "}
                 Create New Group
               </Typography>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDialog(true);
+                }}
+              >
                 <Plus style={{ color: theme.palette.primary.main }} />
               </IconButton>
             </Stack>
             <Divider />
-            <Stack sx={{flexGrow:1, overflowY: "scroll",height:"100%"}}>
-            
+            <Stack
+              spacing={2}
+              sx={{
+                flexGrow: 1,
+                overflow: "hidden", // Default hidden scrollbar
+                height: "100%",
+                paddingRight: "10px", // Space between elements and scrollbar
+                "&:hover": {
+                  overflowY: "auto", // Enable scrollbar on hover
+                },
+                "&::-webkit-scrollbar": {
+                  width: "6px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor:
+                    theme.palette.mode === "light"
+                      ? "#c4c4c4" // Light mode scrollbar color
+                      : "#616161", // Dark mode scrollbar color
+                  borderRadius: "4px",
+                },
+                "&::-webkit-scrollbar-thumb:hover": {
+                  backgroundColor:
+                    theme.palette.mode === "light" ? "#a3a3a3" : "#828282",
+                },
+                "&::-webkit-scrollbar-track": {
+                  backgroundColor:
+                    theme.palette.mode === "light"
+                      ? "#f0f0f0"
+                      : theme.palette.background.default,
+                },
+              }}
+            >
+              <Stack spacing={2.4}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    color:
+                      theme.palette.mode === "light" ? "#676767" : "#FFFFFF",
+                  }}
+                >
+                  Pinned
+                </Typography>
+                {ChatList.filter((el) => el.pinned).map((el) => {
+                  return <ChatElement {...el} />;
+                })}
+              </Stack>
+              <Typography variant="subtitle2" sx={{ color: "#676667" }}>
+                All Groups
+              </Typography>
+              {/* Chat List */}
+              {ChatList.filter((el) => !el.pinned).map((el) => {
+                return <ChatElement {...el} />;
+              })}
             </Stack>
           </Stack>
         </Box>
 
         {/* Right Side */}
       </Stack>
+      {openDialog && (
+        <CreateGroup open={openDialog} handleClose={handleCloseDialog} />
+      )}
     </>
   );
 };
