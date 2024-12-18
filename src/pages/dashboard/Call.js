@@ -108,7 +108,6 @@ const Call = () => {
               }}
             >
               <Stack spacing={2.4}>
-              
                 {/* Call Logs*/}
                 {CallLogs.map((el) => (
                   <CallLogElement {...el} />
@@ -120,7 +119,9 @@ const Call = () => {
 
         {/* Right Side */}
       </Stack>
-      {openDialog && <StartCall open={openDialog} handleClose={handleCloseDialog}/> }
+      {openDialog && (
+        <StartCall open={openDialog} handleClose={handleCloseDialog} />
+      )}
     </>
   );
 };

@@ -2,10 +2,10 @@ import { faker } from "@faker-js/faker";
 import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 import StyledBadge from "./StyledBadge";
-import { ArrowDownLeft, ArrowUUpRight, Phone, VideoCamera } from "phosphor-react";
+import { ArrowDownLeft, ArrowUpRight, Phone, VideoCamera } from "phosphor-react";
 
 
-const CallLogElement = (online, incoming, missed) => {
+const CallLogElement = ({online, incoming, missed}) => {
   
   return (
     <>
@@ -50,7 +50,7 @@ const CallLogElement = (online, incoming, missed) => {
                 {incoming ? (
                   <ArrowDownLeft color={missed ? "red" : "green"} />
                 ) : (
-                  <ArrowUUpRight color={missed ? "red" : "green"} />
+                  <ArrowUpRight color={missed ? "red" : "green"} />
                 )}
                 <Typography variant="caption">Yesterday 21:25</Typography>
               </Stack>
