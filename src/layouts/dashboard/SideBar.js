@@ -1,25 +1,64 @@
 import React, { useState } from "react";
-import { Box, IconButton, Stack, Divider, Avatar, Menu, MenuItem } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  Divider,
+  Avatar,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Logo from "../../assets/Images/logo.ico";
 import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import useSettings from "../../hooks/useSettings";
 import AntSwitch from "../../components/AntSwitch";
+import { useNavigate } from "react-router-dom";
 
+const getPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/app";
+    case 1:
+      return "/group";
+    case 2:
+      return "/call";
+    case 3:
+      return "/settings";
+
+    default:
+      break;
+  }
+};
+const getMenuPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/profile";
+    case 1:
+      return "/settings";
+    case 2:
+      // TODO => Update token and set isAuth = false
+      return "/auth/login";
+
+    default:
+      break;
+  }
+};
 
 const SideBar = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
   const { onToggleMode } = useSettings();
   const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box
       p={2}
@@ -73,6 +112,7 @@ const SideBar = () => {
                   key={el.index}
                   onClick={() => {
                     setSelected(el.index);
+                    navigate(getPath(el.index));
                   }}
                   sx={{
                     width: "max-content",
@@ -102,6 +142,7 @@ const SideBar = () => {
             ) : (
               <IconButton
                 onClick={() => {
+                  navigate(getPath(3));
                   setSelected(3);
                 }}
                 sx={{
@@ -150,9 +191,17 @@ const SideBar = () => {
             }}
           >
             <Stack spacing={1} px={1}>
-              {Profile_Menu.map((el) => (
-                <MenuItem onClick={handleClick}>
+              {Profile_Menu.map((el, idx) => (
+                <MenuItem
+                  onClick={() => {
+                    handleClick();
+                    navigate(getMenuPath(idx));
+                  }}
+                >
                   <Stack
+                    onClick={() => {
+                      navigate(getMenuPath(idx));
+                    }}
                     sx={{ width: 100 }}
                     direction="row"
                     alignItems={"center"}

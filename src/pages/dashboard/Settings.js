@@ -93,14 +93,15 @@ const Settings = () => {
         {/* Left Panel */}
         <Box
           sx={{
-            overflowY: "hidden",
+            overflow: "hidden",
             height: "100vh",
             width: 340,
             backgroundColor:
-              theme.palette.mode === "Light"
+              theme.palette.mode === "light"
                 ? "#F8FAFF"
-                : theme.palette.background,
-            boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
+                : theme.palette.background.default,
+            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
+
             "&:hover": {
               overflowY: "auto", // Enable scrollbar on hover
             },
