@@ -8,8 +8,11 @@ import { Eye, EyeSlash, Password } from "phosphor-react";
 import { Stack } from "@mui/system";
 import { Alert, Button, IconButton, InputAdornment, Link } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
+import { useDispatch } from "react-redux";
+import { LoginUser } from "../../redux/slices/auth";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -20,8 +23,8 @@ const LoginForm = () => {
   });
 
   const defaultValues = {
-    email: "sample@gmail.com",
-    password: "sample1234",
+    email: "abduladheel123@gmail.com",
+    password: "123456",
   };
 
   const methods = useForm({
@@ -39,6 +42,8 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       // submit data to backend
+      dispatch(LoginUser(data))
+
     } catch (error) {
       console.log(error);
       reset();
