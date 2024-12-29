@@ -3,7 +3,7 @@ import { useTheme, styled } from "@mui/material/styles";
 import { Avatar, Stack, Box, Typography, Button, IconButton } from "@mui/material";
 import StyledBadge from "./StyledBadge";
 import { socket } from "../socket";
-import Chat from "phosphor-react";
+import {Chat} from "phosphor-react";
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
   "&:hover": {
