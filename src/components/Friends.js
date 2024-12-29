@@ -11,8 +11,10 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
   },
 }));
 
+ const user_id = window.localStorage.getItem("user_id");
+
 const UserComponent = ({ firstName, lastName, _id, online, img }) => {
-  const user_id = window.localStorage.getItem("user_id");
+
   const theme = useTheme();
   const name = `${firstName} ${lastName}`;
 
@@ -114,7 +116,7 @@ const FriendRequestComponent = ({ firstName, lastName, _id, online, img, id }) =
 };
 
 const FriendComponent = ({ firstName, lastName, _id, online, img }) => {
-  const user_id = window.localStorage.getItem("user_id");
+ 
   const theme = useTheme();
   const name = `${firstName} ${lastName}`;
 

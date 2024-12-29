@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   IconButton,
@@ -17,6 +17,11 @@ import {
   StyledInputBase,
 } from "../../components/Search";
 import Friends from "../../sections/main/Friends";
+import { socket } from "../../socket";
+import { FetchDirectConversations } from "../../redux/slices/conversation";
+import { useDispatch, useSelector } from "react-redux";
+
+const user_id = window.localStorage.getItem("user_id");
 
 const Chats = () => {
  const [openDialog, setOpenDialog] = useState(false);
@@ -27,6 +32,20 @@ const Chats = () => {
  const handleOpenDialog = () => {
    setOpenDialog(true);
  };
+ const dispatch = useDispatch();
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
+
+
+  useEffect(() => {
+    socket.emit("get_direct_conversations", { user_id }, (data) => {
+      console.log(data); // this data is the list of conversations
+      // dispatch action
+
+      dispatch(FetchDirectConversations({ conversations: data }));
+    });
+  }, []);
 
   const theme = useTheme();
   return (
@@ -115,7 +134,7 @@ const Chats = () => {
             }}
           >
             <Stack spacing={2.4}>
-              <Typography
+              {/* <Typography
                 variant="subtitle2"
                 sx={{
                   color: theme.palette.mode === "light" ? "#676767" : "#FFFFFF",
@@ -125,7 +144,7 @@ const Chats = () => {
               </Typography>
               {ChatList.filter((el) => el.pinned).map((el) => {
                 return <ChatElement {...el} />;
-              })}
+              })} */}
             </Stack>
             <Stack spacing={2.4}>
               <Typography
@@ -136,7 +155,7 @@ const Chats = () => {
               >
                 All Chats
               </Typography>
-              {ChatList.filter((el) => !el.pinned).map((el) => {
+              {conversations.filter((el) => !el.pinned).map((el) => {
                 return <ChatElement {...el} />;
               })}
             </Stack>
