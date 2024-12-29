@@ -15,8 +15,8 @@ const initialState = {
   // all_users: [],
   friends: [], // all friends
   friendRequests: [], // all friend requests
-  // chat_type: null,
-  // room_id: null,
+  chat_type: null,
+  room_id: null,
   // call_logs: [],
 };
 
@@ -54,10 +54,10 @@ const slice = createSlice({
     updateFriendRequests(state, action) {
       state.friendRequests = action.payload.requests;
     },
-    // selectConversation(state, action) {
-    //   state.chat_type = "individual";
-    //   state.room_id = action.payload.room_id;
-    // },
+    selectConversation(state, action) {
+      state.chat_type = "individual";
+      state.room_id = action.payload.room_id;
+    },
   },
 });
 
@@ -169,3 +169,9 @@ export function FetchFriendRequests() {
       });
   };
 }
+
+export const SelectConversation = ({ room_id }) => {
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.selectConversation({ room_id }));
+  };
+};

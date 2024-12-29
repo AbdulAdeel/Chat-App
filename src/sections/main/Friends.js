@@ -7,10 +7,10 @@ import {
   FetchUsers,
 } from "../../redux/slices/app";
 import {
-  FriendElement,
-  FriendRequestElement,
-  UserElement,
-} from "../../components/UserElement";
+  FriendComponent,
+  FriendRequestComponent,
+  UserComponent,
+} from "../../components/Friends";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -28,7 +28,7 @@ const UsersList = () => {
   return (
     <>
       {users.map((el, idx) => {
-        return <UserElement key={idx} {...el} />;
+        return <UserComponent key={el.id} {...el} />;
       })}
     </>
   );
@@ -46,7 +46,7 @@ const FriendsList = () => {
   return (
     <>
       {friends.map((el, idx) => {
-        return <FriendElement key={idx} {...el} />;
+        return <FriendComponent key={el.id} {...el} />;
       })}
     </>
   );
@@ -64,7 +64,7 @@ const RequestsList = () => {
   return (
     <>
       {friendRequests.map((el, idx) => {
-        return <FriendRequestElement key={idx} {...el.sender} id={el._id} />;
+        return <FriendRequestComponent key={idx} {...el.sender} id={el._id} />;
       })}
     </>
   );
